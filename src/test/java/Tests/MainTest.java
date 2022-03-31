@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Test;
@@ -43,47 +44,31 @@ public class MainTest extends UserDataJsonParser {
         driver.findElement(By.xpath("//*[@id=\"a-autoid-0-announce\"]")).click();
         driver.findElement(By.xpath("//*[@id=\"s-result-sort-select_2\"]")).click();
         TimeUnit.SECONDS.sleep(2);
-        driver.findElement(By.xpath("//div[contains(@data-index,10)]")).click();
+        driver.findElement(By.xpath("//div[contains(@data-index,5)]")).click();
         TimeUnit.SECONDS.sleep(2);
-        WebElement element = driver.findElement(By.id("desktop_qualifiedBuyBox"));
-        boolean value = element.isDisplayed();
+        WebElement a = driver.findElement(By.id("desktop_qualifiedBuyBox"));
+        boolean value = a.isEnabled();
 
-        if (value == true) {
+        if (value == false) {
             driver.findElement(By.xpath("//*[@id=\"simpleBundleV2_feature_div\"]/div/div[1]/div/div/span[1]/div/label/input")).click();
-            addToCartTwoOrder();
-        }
-        else {
-            addToCartSingleOrder();
-        }
-    }
-    
-        void addToCartTwoOrder() throws InterruptedException {
-
             //add your order
             driver.findElement(By.id("add-to-cart-button")).click();
             TimeUnit.SECONDS.sleep(2);
-
             driver.findElement(By.xpath("//*[@id=\"attach-sidesheet-view-cart-button\"]/span/input")).click();
             TimeUnit.SECONDS.sleep(2);
-
-            //delete an order
-            driver.findElement(By.className("a-color-link")).click();
-            TimeUnit.SECONDS.sleep(2);
-        }
-    
-        void addToCartSingleOrder() throws InterruptedException {
+        } else {
             //add your order
             driver.findElement(By.id("add-to-cart-button")).click();
             TimeUnit.SECONDS.sleep(2);
 
             driver.findElement(By.xpath("//*[@id=\"sw-gtc\"]/span/a")).click();
             TimeUnit.SECONDS.sleep(2);
-
-            //delete an order
-            driver.findElement(By.className("a-color-link")).click();
-            TimeUnit.SECONDS.sleep(2);
-
         }
+
+        //delete an order
+        driver.findElement(By.className("a-color-link")).click();
+        TimeUnit.SECONDS.sleep(2);
+    }
 
     @Test(priority = 3)
     public void addToCartAnotherOrder() throws InterruptedException {
@@ -124,8 +109,10 @@ public class MainTest extends UserDataJsonParser {
         driver.findElement(By.xpath("//*[@id=\"hmenu-content\"]/ul[1]/li[16]/a")).click();
         TimeUnit.SECONDS.sleep(2);
     }
+
     @AfterTest
     public void tearDown() {
         driver.quit();
     }
+
 }
