@@ -43,12 +43,15 @@ public class MainTest extends UserDataJsonParser {
         driver.findElement(By.xpath("//*[@id=\"a-autoid-0-announce\"]")).click();
         driver.findElement(By.xpath("//*[@id=\"s-result-sort-select_2\"]")).click();
         TimeUnit.SECONDS.sleep(2);
-        driver.findElement(By.xpath("//div[contains(@data-index,5)]")).click();
+
+        //Set order according to data-index
+        driver.findElement(By.xpath("//div[contains(@data-index,12)]")).click();
         TimeUnit.SECONDS.sleep(2);
-        WebElement a = driver.findElement(By.id("desktop_qualifiedBuyBox"));
+
+        WebElement a = driver.findElement(By.id("simpleBundleV2_feature_div"));
         boolean value = a.isEnabled();
 
-        if (value == false) {
+        if (value) {
             driver.findElement(By.xpath("//*[@id=\"simpleBundleV2_feature_div\"]/div/div[1]/div/div/span[1]/div/label/input")).click();
             //add your order
             driver.findElement(By.id("add-to-cart-button")).click();
