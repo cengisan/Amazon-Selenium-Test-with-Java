@@ -2,7 +2,7 @@ Hi!
 
 In this project, I wrote a selenium web test automation in Java. My test case is in following.
 
-| First Header  | Second Header |
+| Steps  | Test Cases |
 | :-----------: | ------------- |
 | 1  | Login  |
 | 2 | Search Iphone 13 max pro  |
