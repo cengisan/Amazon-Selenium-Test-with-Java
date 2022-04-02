@@ -23,7 +23,7 @@ public class MainTest extends UserDataJsonParser {
         System.setProperty("webdriver.chrome.driver", "src/driver/chromedriver.exe");
         driver = new ChromeDriver();
         driver.manage().window().maximize();
-        wait = new WebDriverWait(driver, Duration.ofSeconds(2));
+        wait = new WebDriverWait(driver, Duration.ofSeconds(3));
     }
 
     public WebElement elementFinder(By selector) {
@@ -43,7 +43,7 @@ public class MainTest extends UserDataJsonParser {
     }
 
     @Test(priority = 2)
-    public void searchProductAndAddToCart() throws InterruptedException {
+    public void searchProductAndAddToCart() {
 
         elementFinder(By.id("twotabsearchtextbox")).sendKeys("Iphone pro max 13");
         elementFinder(By.id("nav-search-submit-button")).click();
@@ -71,7 +71,7 @@ public class MainTest extends UserDataJsonParser {
     }
 
     @Test(priority = 3)
-    public void addToCartAnotherOrder() throws InterruptedException {
+    public void addToCartAnotherOrder() {
         //add another order
         elementFinder(By.id("twotabsearchtextbox")).sendKeys("xiaomi headphones");
         elementFinder(By.id("nav-search-submit-button")).click();
@@ -82,15 +82,17 @@ public class MainTest extends UserDataJsonParser {
     }
 
     @Test(priority = 4)
-    public void deleteOrders() throws InterruptedException {
+    public void deleteOrders() {
 
-        elementFinder(By.className("a-color-link")).click();
-        elementFinder(By.className("a-color-link")).click();
+        for (int i = 2; i > 0; i--) {
+            elementFinder(By.xpath("//div[contains(@data-item-index," + i + ")]"));
+            elementFinder(By.className("a-color-link")).click();
+        }
 
     }
 
     @Test(priority = 5)
-    public void logout() throws InterruptedException {
+    public void logout() {
 
         elementFinder(By.id("nav-hamburger-menu")).click();
         elementFinder(By.xpath("//*[@id=\"hmenu-content\"]/ul[1]/li[16]/a")).click();
