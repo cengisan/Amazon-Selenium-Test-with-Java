@@ -40,5 +40,6 @@ public class test extends UserDataJsonParser {
 
         logoutTest signout = new logoutTest();
         signout.logout();
+        setUp.tearDown();
     }
 }
